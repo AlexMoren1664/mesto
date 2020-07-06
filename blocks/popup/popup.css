@@ -1,0 +1,22 @@
+@import url(./__form/popup__form.css);
+@import url(./__close/popup__close.css);
+@import url(./__title/popup__title.css);
+@import url(./__input/popup__input.css);
+@import url(./__button/popup__button.css);
+
+.popup {
+    font-family: 'Inter', ‘Arial’, sans-serif;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    display: none;
+}
+
+.popup_open {
+    display: block;
+}

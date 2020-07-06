@@ -1,0 +1,18 @@
+.profile__job {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin: 0;
+    padding-bottom: 36px; 
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 850px) {
+    .profile__profession {
+        font-size: 14px;
+        padding-bottom: 36px;
+    }
+}

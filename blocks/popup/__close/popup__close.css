@@ -1,0 +1,18 @@
+.popup__close {
+    position: absolute;
+    right: -41px;
+    top: -38px;
+    border: 0;
+    font-size: 34px;
+    background-image: url(../../../images/close-Icon.svg);
+    background-position: 0%;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0);
+    min-width: 41px;
+    min-height: 41px;
+    box-sizing: border-box;
+}
+
+.popup__close:hover {
+opacity: .6;
+}
