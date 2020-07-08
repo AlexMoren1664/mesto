@@ -14,8 +14,13 @@
 @media (max-width: 850px) {
     .profile__name {
         font-size: 27px;
-        padding-right: 0;
+        padding-right: 6px;
         padding-bottom: 14px;
         padding-top: 10px;
+    }
+}
+@media (max-width: 570px) {
+    .profile__name {
+        text-align: center;
     }
 }

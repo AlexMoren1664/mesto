@@ -2,6 +2,7 @@
 @import url(./__img/card__img.css);
 @import url(./__item/card__item.css);
 @import url(./__heading/card__heading.css);
+@import url(./__like/card__like.css);
 
 .card {
     display: grid;
