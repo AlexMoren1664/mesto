@@ -3,6 +3,10 @@
 @import url(./__title/popup__title.css);
 @import url(./__input/popup__input.css);
 @import url(./__button/popup__button.css);
+@import url(./__content/popup__content.css);
+@import url(./__img/popup__img.css);
+@import url(./__img-title/popup__img-title.css);
+
 
 .popup {
     font-family: 'Inter', ‘Arial’, sans-serif;
@@ -14,7 +18,10 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
-    display: none;
+    display: flex;/*none*/
     align-items: center;
     justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .5s, opacity .5s linear;
 }
