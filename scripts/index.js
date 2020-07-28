@@ -17,6 +17,8 @@ const placeInput = document.querySelector('.popup__input_type_link');
 const closeGallery = document.querySelector('.popup__close_type_img');
 const popupImgClose = document.querySelector('.popup__close_type_card');
 const templateCard = document.querySelector('.template-card').content.querySelector('.card__grid');
+let cardElements = {};
+const card = document.querySelector('.card');
 
 // popup edit
 function showClick() {
@@ -58,14 +60,11 @@ function closePopupPlace() {
 
 popupImgClose.addEventListener('click', closePopupPlace);
 
-
-
 function formSubmitAddHandler(event) {
   event.preventDefault();
 
 renderCard({name: titleInput.value, link: placeInput.value});
 popupPlace.classList.remove('popup_open')
-
 }
 
 popupFormAdd.addEventListener('submit', formSubmitAddHandler );
@@ -103,13 +102,13 @@ initialCards.forEach((data) => {
 })
 
 function renderCard(data) {
-  let cardElements = templateCard.cloneNode(true);
-  let cardImage = cardElements.querySelector('.card__img');
-  let cardTitle = cardElements.querySelector('.card__heading');
-  let cardLike = cardElements.querySelector('.card__like');
-  let cardDelete = cardElements.querySelector('.card__delete');
-// like
+  cardElements = templateCard.cloneNode(true);
+  const cardImage = cardElements.querySelector('.card__img');
+  const cardTitle = cardElements.querySelector('.card__heading');
+  const cardLike = cardElements.querySelector('.card__like');
+  const cardDelete = cardElements.querySelector('.card__delete');
 
+  // like
 function likeActive() {
   cardLike.classList.toggle('card__like_active')
 } 
@@ -145,13 +144,12 @@ cardImage.addEventListener('click', showClickGallery);
 function closePopupGallery() {
   popupGallery.classList.remove('popup_open'); 
 }
-closeGallery.addEventListener('click', closePopupGallery);
 
+closeGallery.addEventListener('click', closePopupGallery);
 
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
-  
-  let card = document.querySelector('.card');
+  cardImage.alt = data.name;
   card.prepend(cardElements);
   return cardElements;
 }
