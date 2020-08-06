@@ -35,42 +35,6 @@
                                 <h3 class="card__heading">Карачаевск</h3>
                                 <button type="button" class="card__like"></button>
                             </div>
-                        </li>
-                        
-                        <li class="card__grid">
-                            <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Эльбрус"  class="card__img">
-                            <div class="card__item">
-                                <h3 class="card__heading">Гора Эльбрус</h3>
-                                <button type="button" class="card__like"></button>
-                            </div>
-                        </li>
-                        <li class="card__grid">
-                            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай"  class="card__img">
-                            <div class="card__item">
-                                <h3 class="card__heading">Домбай</h3>
-                                <button type="button" class="card__like"></button>
-                            </div>
-                        </li>
-                        <li class="card__grid">
-                            <img src="./images/kirill-pershin-1404681-unsplash.png" alt="Эльбрус"  class="card__img">
-                            <div class="card__item">
-                                <h3 class="card__heading">Гора Эльбрус</h3>
-                                <button type="button" class="card__like"></button>
-                            </div>
-                        </li>
-                        <li class="card__grid">
-                            <img src="./images/kirill-pershin-1556355-unsplash.png" alt="Домбай"  class="card__img">
-                            <div class="card__item">
-                                <h3 class="card__heading">Домбай</h3>
-                                <button type="button" class="card__like"></button>
-                            </div>
-                        </li>
-                        <li class="card__grid">
-                            <img src="./images/kirill-pershin-1088404-unsplash.png" alt="крепость"  class="card__img">
-                            <div class="card__item">
-                                <h3 class="card__heading">Карачаево-Черкесcия</h3>
-                                <button type="button" class="card__like"></button>
-                            </div>
                         </li>-->
                     </ul>
                 </section>
@@ -82,28 +46,32 @@
     </div>
 
     <div class="popup">
-        <form action="#" class="popup__form" name="popupForm" method="POST">
+        <form action="#" class="popup__form" name="popupForm" method="POST" novalidate>
             <button type="button" class="popup__close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input name="name" type="text" class="popup__input popup__input_type_name" value="Жак-Ив Кусто">
-            <input name="job" type="text" class="popup__input popup__input_type_job" value="Исследователь океана">
-            <button type="submit" class="popup__button">Сохранить</button>
+            <input name="name" type="text" class="popup__input popup__input_type_name" value="Жак-Ив Кусто" required minlength="2" maxlength="40" autocomplete="off">
+            <span class="popup__error" id="name-error"></span>
+            <input name="job" type="text" class="popup__input popup__input_type_job" value="Исследователь океана" required minlength="2" maxlength="40" autocomplete="off">
+            <span class="popup__error" id="job-error"></span>
+            <button type="submit" class="popup__button" disabled>Сохранить</button>
         </form>
     </div> 
 
     <div class="popup popup_type_add">
-        <form action="#" class="popup__form popup__form_type_add" name="popupForm" method="POST">
+        <form action="#" class="popup__form popup__form_type_add" name="popupForm" method="POST" novalidate>
             <button type="button" class="popup__close popup__close_type_card"></button>
             <h2 class="popup__title">Новое место</h2>
-            <input name="title" type="text" placeholder="Название" class="popup__input popup__input_type_title" value="">
-            <input name="link" type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" value="">
-            <button type="submit" class="popup__button">Создать</button>
+            <input name="title" type="text" placeholder="Название" class="popup__input popup__input_type_title" value="" required minlength="1" maxlength="30" autocomplete="off">
+            <span class="popup__error " id="title-error"></span>
+            <input name="link" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" value="" required autocomplete="off">
+            <span class="popup__error" id="link-error"></span>
+            <button type="submit" class="popup__button" disabled>Создать</button>
         </form>
     </div>
 
     <div class="popup popup_type_img">
         <div class="popup__content">
-            <button type="button" class="popup__close popup__close_type_img"></button>\
+            <button type="button" class="popup__close popup__close_type_img"></button>
             <figure>
                 <img class="popup__img" src="" alt="">
                 <figcaption class="popup__img-title"></figcaption>
@@ -122,5 +90,6 @@
         </li>
     </template>
     <script src="scripts/index.js"></script>
+    <script src="scripts/validate.js"></script>
 </body>
 </html>

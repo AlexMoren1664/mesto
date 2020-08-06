@@ -35,6 +35,33 @@ function popupClose() {
 
 closePopup.addEventListener('click', popupClose);
 
+//close overlay
+
+  const popupOverlayClose = (event) =>  {
+    if (event.target.classList.contains('popup')) {
+      popupClose();
+      closePopupPlace();
+      closePopupGallery();
+    }
+  }
+
+  popup.addEventListener('mousedown', popupOverlayClose);
+  popupPlace.addEventListener('mousedown', popupOverlayClose);
+  popupGallery.addEventListener('click', popupOverlayClose);
+
+// close esc
+
+  const escapePopupClose = (evt) => {
+    if (evt.key ==='Escape') {
+      popupClose();
+      closePopupPlace();
+      closePopupGallery();
+    }
+  };
+
+  document.addEventListener('keydown', escapePopupClose);
+  
+
 function formSubmitHandler(event) {
     event.preventDefault();
     profileName.textContent = nameInput.value; 
@@ -51,7 +78,6 @@ function showClickPlace() {
 }
 
 openButtonAdd.addEventListener('click', showClickPlace);
-
 
 
 function closePopupPlace() {
@@ -138,15 +164,6 @@ function showClickGallery() {
 
 cardImage.addEventListener('click', showClickGallery);
 
-// closed popup Gallery
-
-
-function closePopupGallery() {
-  popupGallery.classList.remove('popup_open'); 
-}
-
-closeGallery.addEventListener('click', closePopupGallery);
-
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
   cardImage.alt = data.name;
@@ -154,3 +171,10 @@ closeGallery.addEventListener('click', closePopupGallery);
   return cardElements;
 }
 
+// closed popup Gallery
+
+function closePopupGallery() {
+  popupGallery.classList.remove('popup_open'); 
+}
+
+closeGallery.addEventListener('click', closePopupGallery);
