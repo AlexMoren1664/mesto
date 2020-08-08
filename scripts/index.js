@@ -22,36 +22,21 @@ const templateCard = document
 let cardElements = {};
 const card = document.querySelector(".card");
 
-// popup edit
+// open popup
 
-function showClick() {
+function modalOpen(popup) {
   popup.classList.add("popup_open");
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
   document.addEventListener("keydown", escapePopupClose);
+  document.addEventListener("mousedown", popupOverlayClose);
 }
 
-openPopup.addEventListener("click", showClick);
-
-function popupClose() {
-  popup.classList.remove("popup_open");
-}
-
-closePopup.addEventListener("click", popupClose);
+// close popup
 
 function modalClose(popup) {
   popup.classList.remove("popup_open");
+  document.removeEventListener("keydown", escapePopupClose);
+  document.removeEventListener("mousedown", popupOverlayClose);
 }
-
-const popupOverlayClose = (event) => {
-  if (event.target.classList.contains("popup")) {
-    modalClose(event.target);
-  }
-};
-
-popup.addEventListener("mousedown", popupOverlayClose);
-popupPlace.addEventListener("mousedown", popupOverlayClose);
-popupGallery.addEventListener("click", popupOverlayClose);
 
 // close esc
 
@@ -59,44 +44,63 @@ const escapePopupClose = (event) => {
   if (event.key === "Escape") {
     const modalOpen = document.querySelector(".popup_open");
     modalClose(modalOpen);
-    document.removeEventListener("keydown", escapePopupClose);
   }
 };
+
+//  close overlay
+
+const popupOverlayClose = (event) => {
+  if (event.target.classList.contains("popup")) {
+    modalClose(event.target);
+  }
+};
+
+// popup edit
+
+function showClick() {
+  modalOpen(popup);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+}
+openPopup.addEventListener("click", showClick);
 
 function formSubmitHandler(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  popup.classList.remove("popup_open");
+  modalClose(popup);
 }
 
 formElement.addEventListener("submit", formSubmitHandler);
 
 // popup add
 
-function showClickPlace() {
-  popupPlace.classList.add("popup_open");
-  document.addEventListener("keydown", escapePopupClose);
-}
+openButtonAdd.addEventListener("click", () => {
+  modalOpen(popupPlace);
+});
 
-openButtonAdd.addEventListener("click", showClickPlace);
+closePopup.addEventListener("click", () => {
+  modalClose(popup);
+});
 
-function closePopupPlace() {
-  popupPlace.classList.remove("popup_open");
-}
+popupImgClose.addEventListener("click", () => {
+  modalClose(popupPlace);
+});
 
-popupImgClose.addEventListener("click", closePopupPlace);
+closeGallery.addEventListener("click", () => {
+  modalClose(popupGallery);
+});
 
 function formSubmitAddHandler(event) {
   event.preventDefault();
-
   renderCard({ name: titleInput.value, link: placeInput.value });
-  popupPlace.classList.remove("popup_open");
+  modalClose(popupPlace);
 }
 
 popupFormAdd.addEventListener("submit", formSubmitAddHandler);
 
 // Темплейт
+
 const initialCards = [
   {
     name: "Архыз",
@@ -130,11 +134,7 @@ const initialCards = [
   },
 ];
 
-initialCards.forEach((data) => {
-  renderCard(data);
-});
-
-function renderCard(data) {
+function createCard(data) {
   cardElements = templateCard.cloneNode(true);
   const cardImage = cardElements.querySelector(".card__img");
   const cardTitle = cardElements.querySelector(".card__heading");
@@ -146,9 +146,7 @@ function renderCard(data) {
     cardLike.classList.toggle("card__like_active");
   }
 
-  cardLike.addEventListener("click", () => {
-    likeActive();
-  });
+  cardLike.addEventListener("click", likeActive);
 
   // delete card
 
@@ -156,18 +154,15 @@ function renderCard(data) {
     cardDelete.closest(".card__grid").remove();
   }
 
-  cardDelete.addEventListener("click", () => {
-    cardDeleteButton();
-  });
+  cardDelete.addEventListener("click", cardDeleteButton);
 
   // open popup gallery
 
   function showClickGallery() {
-    popupGallery.classList.add("popup_open");
+    modalOpen(popupGallery);
     popupGalleryImg.src = data.link;
     popupGalleryTitle.textContent = data.name;
     popupGalleryTitle.alt = data.name;
-    document.addEventListener("keydown", escapePopupClose);
   }
 
   cardImage.addEventListener("click", showClickGallery);
@@ -175,14 +170,13 @@ function renderCard(data) {
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
   cardImage.alt = data.name;
-  card.prepend(cardElements);
   return cardElements;
 }
 
-// closed popup Gallery
-
-function closePopupGallery() {
-  popupGallery.classList.remove("popup_open");
+function renderCard(data) {
+  card.prepend(createCard(data));
 }
 
-closeGallery.addEventListener("click", closePopupGallery);
+initialCards.forEach((data) => {
+  renderCard(data);
+});
