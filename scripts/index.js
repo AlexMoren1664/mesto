@@ -1,3 +1,6 @@
+import { FormValidator } from "./FormValidator.js";
+import { Card } from "./Card.js";
+
 const openPopup = document.querySelector(".profile__edit-button");
 const popup = document.querySelector(".popup");
 const closePopup = document.querySelector(".popup__close");
@@ -6,9 +9,9 @@ const jobInput = document.querySelector(".popup__input_type_job");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 const formElement = document.querySelector(".popup__form");
-const popupGallery = document.querySelector(".popup_type_img");
-const popupGalleryImg = document.querySelector(".popup__img");
-const popupGalleryTitle = document.querySelector(".popup__img-title");
+export const popupGallery = document.querySelector(".popup_type_img");
+export const popupGalleryImg = document.querySelector(".popup__img");
+export const popupGalleryTitle = document.querySelector(".popup__img-title");
 const openButtonAdd = document.querySelector(".profile__add-button");
 const popupPlace = document.querySelector(".popup_type_add");
 const popupFormAdd = document.querySelector(".popup__form_type_add");
@@ -19,12 +22,11 @@ const popupImgClose = document.querySelector(".popup__close_type_card");
 const templateCard = document
   .querySelector(".template-card")
   .content.querySelector(".card__grid");
-let cardElements = {};
 const card = document.querySelector(".card");
 
 // open popup
 
-function modalOpen(popup) {
+export function modalOpen(popup) {
   popup.classList.add("popup_open");
   document.addEventListener("keydown", escapePopupClose);
   document.addEventListener("mousedown", popupOverlayClose);
@@ -93,7 +95,14 @@ closeGallery.addEventListener("click", () => {
 
 function formSubmitAddHandler(event) {
   event.preventDefault();
-  renderCard({ name: titleInput.value, link: placeInput.value });
+
+  const place = new Card(
+    { name: titleInput.value, link: placeInput.value },
+    templateCard
+  );
+  const element = place.generateCard();
+  card.prepend(element);
+  //renderCard({ name: titleInput.value, link: placeInput.value });
   modalClose(popupPlace);
 }
 
@@ -134,49 +143,27 @@ const initialCards = [
   },
 ];
 
-function createCard(data) {
-  cardElements = templateCard.cloneNode(true);
-  const cardImage = cardElements.querySelector(".card__img");
-  const cardTitle = cardElements.querySelector(".card__heading");
-  const cardLike = cardElements.querySelector(".card__like");
-  const cardDelete = cardElements.querySelector(".card__delete");
+//вставил массив в DOM
 
-  // like
-  function likeActive() {
-    cardLike.classList.toggle("card__like_active");
-  }
-
-  cardLike.addEventListener("click", likeActive);
-
-  // delete card
-
-  function cardDeleteButton() {
-    cardDelete.closest(".card__grid").remove();
-  }
-
-  cardDelete.addEventListener("click", cardDeleteButton);
-
-  // open popup gallery
-
-  function showClickGallery() {
-    modalOpen(popupGallery);
-    popupGalleryImg.src = data.link;
-    popupGalleryTitle.textContent = data.name;
-    popupGalleryTitle.alt = data.name;
-  }
-
-  cardImage.addEventListener("click", showClickGallery);
-
-  cardTitle.textContent = data.name;
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  return cardElements;
-}
-
-function renderCard(data) {
-  card.prepend(createCard(data));
-}
-
-initialCards.forEach((data) => {
-  renderCard(data);
+initialCards.forEach((item) => {
+  const cardArray = new Card(item, templateCard);
+  const element = cardArray.generateCard();
+  card.prepend(element);
 });
+
+const object = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+// новые класс валидации
+const validatorProfile = new FormValidator(formElement, object);
+
+const validatorAddCard = new FormValidator(popupFormAdd, object);
+
+validatorProfile.enableValidation();
+validatorAddCard.enableValidation();

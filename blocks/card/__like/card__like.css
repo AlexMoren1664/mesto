@@ -5,9 +5,10 @@
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, 0);
     border: 0;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     box-sizing: border-box;
+    outline: 0;
 }
 .card__like:hover {
     opacity: .6;

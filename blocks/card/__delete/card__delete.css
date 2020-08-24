@@ -9,7 +9,7 @@
     width: 18px;
     height: 18px;
     background-color: rgba(0, 0, 0, 0);
-    
+    outline: 0;
 }
 .card__delete:hover {
     opacity: .6;
