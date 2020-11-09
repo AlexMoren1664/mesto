@@ -1,5 +1,3 @@
-
-  
   export class Card {
     constructor(data, template, handleCardClick) {
       this._name = data.name;
@@ -33,10 +31,8 @@
   
     //удаление карточки
     _cardDeleteButton() {
-      this._element
-        .querySelector(".card__delete")
-        .closest(".card__grid")
-        .remove();
+      this._element.remove();
+      this._element = null;
     }
   
     _setEventListeners() {
