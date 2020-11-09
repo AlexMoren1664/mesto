@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css" type="text/css">
+  <!--<link rel="stylesheet" href="pages/index.css" type="text/css">-->
   <title>Mesto</title>
 </head>
 <body>
@@ -45,11 +45,11 @@
         </div>
     </div>
 
-    <div class="popup">
+    <div class="popup popup_type_edit">
         <form action="#" class="popup__form" name="popupForm" method="POST" novalidate>
             <button type="button" class="popup__close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input name="name" type="text" class="popup__input popup__input_type_name" value="Жак-Ив Кусто" required minlength="2" maxlength="40" autocomplete="off">
+            <input name="name" type="text" class="popup__input popup__input_type_name" value="Жaк-Ив Кусто" required minlength="2" maxlength="40" autocomplete="off">
             <span class="popup__error" id="name-error"></span>
             <input name="job" type="text" class="popup__input popup__input_type_job" value="Исследователь океана" required minlength="2" maxlength="40" autocomplete="off">
             <span class="popup__error" id="job-error"></span>
@@ -73,7 +73,7 @@
         <div class="popup__content">
             <button type="button" class="popup__close popup__close_type_img"></button>
             <figure>
-                <img class="popup__img" src="" alt="">
+                <img class="popup__img" src="#" alt="#">
                 <figcaption class="popup__img-title"></figcaption>
             </figure>
         </div>
@@ -81,7 +81,7 @@
 
     <template class="template-card">
         <li class="card__grid">
-            <img src="" alt="" class="card__img">
+            <img src="#" alt="#" class="card__img">
             <button type="button" class="card__delete"></button>
             <div class="card__item">
                 <h3 class="card__heading">Карачаевск</h3>
@@ -89,6 +89,6 @@
             </div>
         </li>
     </template>
-    <script type="module" src="scripts/index.js"></script>
+    <!-- <script type="module" src="pages/index.js"></script> -->
 </body>
 </html>
