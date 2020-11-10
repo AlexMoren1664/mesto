@@ -23,9 +23,6 @@ const popupCardCloseBtn = document.querySelector(".popup__close_type_card");
 const templateCard = document
   .querySelector(".template-card")
   .content.querySelector(".card__grid");
-const card = document.querySelector(".card");
-
-
 
 // экземпляры класс валидации
 
@@ -33,6 +30,7 @@ const validatorProfile = new FormValidator(popupFormEdit, object);
 const validatorAddCard = new FormValidator(popupFormAdd, object);
 
 validatorProfile.enableValidation();
+validatorAddCard.enableValidation();
 
 // отрисовка карточек
 
@@ -43,8 +41,7 @@ const cardList = new Section(
       const openImagePopup = (name, link) => {
         popupImageClass.open(name, link);
       };
-      const cardArray = new Card(item, templateCard, openImagePopup);
-      createCard(cardArray)
+      createCard(item, templateCard, openImagePopup)
     },
   },
   ".card"
@@ -54,11 +51,11 @@ cardList.renderItems();
 
 // функция создания карточки
 
-function createCard(element) {
-  const card = element.generateCard();
-  cardList.setItem(card);
+function createCard(data, template, handleCardClick) {
+  const card = new Card (data, template, handleCardClick)
+  const element = card.generateCard();
+  cardList.setItem(element);
 }
-
 // попап с картинкой
 
 const popupImageClass = new PopupWithImage(".popup_type_img");
@@ -72,12 +69,9 @@ popupGalleryCloseBtn.addEventListener("click", () => popupImageClass.close());
 // попап с формами
 
 const addPopup = new PopupWithForm(".popup_type_add", () => {
-  const place = new Card(
-    { name: titleInput.value, link: placeInput.value },
+  createCard({ name: titleInput.value, link: placeInput.value },
     templateCard,
-    openImagePopup
-  );
-  createCard(place);
+    openImagePopup);
   addPopup.close();
 });
 
@@ -85,7 +79,7 @@ addPopup.setEventListeners();
 
 openButtonAdd.addEventListener("click", () => {
   addPopup.open();
-  validatorAddCard.enableValidation();
+  validatorAddCard.buttonDisable();
 });
 
 popupCardCloseBtn.addEventListener("click", () => addPopup.close());

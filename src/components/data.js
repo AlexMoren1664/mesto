@@ -43,3 +43,10 @@ export const initialCards = [
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible",
   };
+
+
+  // function createCard(data, template, handleCardClick) {
+  //   const card = new Card (data, template, handleCardClick)
+  //   const cardd = card.generateCard();
+  //   cardList.setItem(cardd);
+  // }

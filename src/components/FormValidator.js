@@ -55,7 +55,21 @@ export  class FormValidator {
         buttonSubmit.removeAttribute("disabled");
       }
     }
-  
+    
+    // отключение кнопки
+    buttonDisable() {
+      const inputs = Array.from(
+        this._formElement.querySelectorAll(this._inputSelector)
+      );
+      if (this._hasInvalidInput(inputs)) {
+        const buttonSubmit = this._formElement.querySelector(
+          this._submitButtonSelector
+        );
+        buttonSubmit.classList.add(this._inactiveButtonClass);
+        buttonSubmit.setAttribute("disabled", true);
+      }
+    }
+
     //слушатель
   
     _setEventListener() {
