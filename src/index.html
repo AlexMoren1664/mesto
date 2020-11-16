@@ -14,14 +14,21 @@
             </header>
             <main class="content">
                 <section class="profile">
-                    <img  src="./images/image.png" alt="Кусто" class="profile__avatar">
+                    <div class="profile__avatar">
+                        <img  src="#" alt="Кусто" class="profile__img">
+                        <div class="profile__cover">
+                            <button type="button" class="profile__button">
+                        </div>
+
+                    </div>
+                    
                     <div class="profile__info">
                         <div class="profile__container">
-                            <h2 class="profile__name">Жак-Ив Кусто</h2>
+                            <h2 class="profile__name"></h2>
                             <button type="button" class=" profile__edit-button">
                             </button>
                         </div>
-                        <h3 class="profile__job">Исследователь океана</h3>
+                        <h3 class="profile__job"></h3>
                     </div>
                     <button type="button" class=" profile__add-button">
                     </button>
@@ -51,9 +58,9 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <input name="name" type="text" class="popup__input popup__input_type_name" value="Жaк-Ив Кусто" required minlength="2" maxlength="40" autocomplete="off">
             <span class="popup__error" id="name-error"></span>
-            <input name="job" type="text" class="popup__input popup__input_type_job" value="Исследователь океана" required minlength="2" maxlength="40" autocomplete="off">
-            <span class="popup__error" id="job-error"></span>
-            <button type="submit" class="popup__button" disabled>Сохранить</button>
+            <input name="about" type="text" class="popup__input popup__input_type_job" value="Исследователь океана" required minlength="2" maxlength="40" autocomplete="off">
+            <span class="popup__error" id="about-error"></span>
+            <button type="submit" class="popup__button popup__button_type_profile" disabled>Сохранить</button>
         </form>
     </div> 
 
@@ -61,11 +68,11 @@
         <form action="#" class="popup__form popup__form_type_add" name="form-card" method="POST" novalidate>
             <button type="button" class="popup__close popup__close_type_card"></button>
             <h2 class="popup__title">Новое место</h2>
-            <input name="title" type="text" placeholder="Название" class="popup__input popup__input_type_title" value="" required minlength="1" maxlength="30" autocomplete="off">
-            <span class="popup__error " id="title-error"></span>
+            <input name="name" type="text" placeholder="Название" class="popup__input popup__input_type_title" value="" required minlength="1" maxlength="30" autocomplete="off">
+            <span class="popup__error " id="name-error"></span>
             <input name="link" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" value="" required autocomplete="off">
             <span class="popup__error" id="link-error"></span>
-            <button type="submit" class="popup__button" disabled>Создать</button>
+            <button type="submit" class="popup__button popup__button_type_card" disabled>Создать</button>
         </form>
     </div>
 
@@ -79,13 +86,35 @@
         </div>
     </div>
 
+    <div class="popup popup_type_avatar">
+        <form action="#" class="popup__form popup__form_type_avatar" name="form-avatar" method="POST" novalidate>
+            <button type="button" class="popup__close popup__close_type_avatar"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <input name="link" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_avatar" value="" required autocomplete="off">
+            <span class="popup__error" id="link-error"></span>
+            <button type="submit" class="popup__button popup__button_type_avatar" disabled>Сохранить</button>
+        </form>
+    </div>
+
+    <div class="popup popup_type_deleting">
+        <form action="#" class="popup__form popup__form_type_deleting" name="form-deleting">
+            <button type="button" class="popup__close popup__close_type_deleting"></button>
+            <h2 class="popup__title popup__title_type_deleting">Вы уверены?</h2>
+            <button type="submit" class="popup__button">Да</button>
+        </form>
+    </div>
+
     <template class="template-card">
         <li class="card__grid">
             <img src="#" alt="#" class="card__img">
             <button type="button" class="card__delete"></button>
             <div class="card__item">
                 <h3 class="card__heading">Карачаевск</h3>
-                <button type="button" class="card__like"></button>
+                <div class="card__like-container">
+                    <button type="button" class="card__like"></button>
+                    <div class="card__counter">0</div>
+                </div>
+                
             </div>
         </li>
     </template>
