@@ -23,6 +23,8 @@ const popupFormAvatar = document.querySelector(".popup__form_type_avatar");
 const openButtonAdd = document.querySelector(".profile__add-button");
 const popupGalleryCloseBtn = document.querySelector(".popup__close_type_img");
 const popupCardCloseBtn = document.querySelector(".popup__close_type_card");
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput =  document.querySelector('.popup__input_type_job');
 const templateCard = document
   .querySelector(".template-card")
   .content.querySelector(".card__grid");
@@ -43,7 +45,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userId._id = userInfo._id;
     console.log(userId);
     userProfileInfo.setUserInfo(userInfo);
-    cardList.renderItems(cards);
+    cardList.renderItems(cards.reverse());
   })
   .catch((err) => {
     console.log(err);
@@ -112,16 +114,19 @@ const createCard = (data) => {
         .catch((err) => {
           console.log(err);
         });
+        popupDelete.close();
     });
   }
 
   function addLike() {
     api
       .putLike(data._id)
-      .then(() => {
-        console.log("addlike");
+      .then((data) => {
+        card.counterLike(data.likes)
+        card.toggleLike()
       })
       .catch((err) => {
+        
         console.log(err);
       });
   }
@@ -129,8 +134,9 @@ const createCard = (data) => {
   function deleteLike() {
     api
       .deleteLike(data._id)
-      .then(() => {
-        console.log("deletelike");
+      .then((data) => {
+        card.counterLike(data.likes)
+        card.toggleLike()
       })
       .catch((err) => {
         console.log(err);
@@ -151,6 +157,7 @@ const addPopup = new PopupWithForm(".popup_type_add", (res) => {
     .finally(() => {
       renderAddLoading(false, buttonAddCard);
     });
+    addPopup.close();
 });
 
 addPopup.setEventListeners();
@@ -169,10 +176,11 @@ const user = {
 };
 
 const userProfileInfo = new UserInfo(user);
-const userProfile = userProfileInfo.getUserInfo();
+
 editButton.addEventListener("click", () => {
-  profileName.value = userProfile.name;
-  profileJob.value = userProfile.about;
+  const userProfile = userProfileInfo.getUserInfo();
+  nameInput.value = userProfile.name;
+  jobInput.value = userProfile.about
   popupFormProfile.open();
 });
 
@@ -190,6 +198,7 @@ const submitForm = (res) => {
     .finally(() => {
       renderLoading(false, buttonProfile);
     });
+    popupFormProfile.close();
 };
 
 const popupFormProfile = new PopupWithForm(".popup_type_edit", submitForm);
@@ -214,6 +223,7 @@ const submitFormAvatar = (res) => {
     .finally(() => {
       renderLoading(false, buttonAvatar);
     });
+    popupFormWithAvatar.close();
 };
 
 const popupFormWithAvatar = new PopupWithForm(
