@@ -110,11 +110,11 @@ const createCard = (data) => {
         .then(() => {
           console.log(data._id);
           card.cardDeleteButton(data);
+          popupDelete.close();
         })
         .catch((err) => {
           console.log(err);
         });
-        popupDelete.close();
     });
   }
 
@@ -126,7 +126,6 @@ const createCard = (data) => {
         card.toggleLike()
       })
       .catch((err) => {
-        
         console.log(err);
       });
   }
@@ -150,6 +149,7 @@ const addPopup = new PopupWithForm(".popup_type_add", (res) => {
     .getNewCard(res)
     .then((res) => {
       createCard(res);
+      addPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -157,7 +157,6 @@ const addPopup = new PopupWithForm(".popup_type_add", (res) => {
     .finally(() => {
       renderAddLoading(false, buttonAddCard);
     });
-    addPopup.close();
 });
 
 addPopup.setEventListeners();
@@ -191,6 +190,7 @@ const submitForm = (res) => {
     .then((res) => {
       console.log(res);
       userProfileInfo.setUserInfo(res);
+      popupFormProfile.close();
     })
     .catch((err) => {
       console.log(err);
@@ -198,7 +198,6 @@ const submitForm = (res) => {
     .finally(() => {
       renderLoading(false, buttonProfile);
     });
-    popupFormProfile.close();
 };
 
 const popupFormProfile = new PopupWithForm(".popup_type_edit", submitForm);
@@ -216,6 +215,7 @@ const submitFormAvatar = (res) => {
     .updateAvatar(res)
     .then((res) => {
       userProfileInfo.setUserInfo(res);
+      popupFormWithAvatar.close();
     })
     .catch((err) => {
       console.log(err);
@@ -223,7 +223,7 @@ const submitFormAvatar = (res) => {
     .finally(() => {
       renderLoading(false, buttonAvatar);
     });
-    popupFormWithAvatar.close();
+
 };
 
 const popupFormWithAvatar = new PopupWithForm(
